@@ -1,0 +1,67 @@
+{{!-- consultarModalidade.handlebars --}}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Modalidades</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Gestão do Sistema</h1>
+    </header>
+
+    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #f1f1f1; color: #333;">
+        <ul class="navbar-menu" style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
+            <li><a href="/" style="color: #333; text-decoration: none;">Home</a></li> <!-- Adicionando o botão Home -->
+            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;">Membros Inscritos</a></li>
+            <li><a href="/consultarContato" style="color: #333; text-decoration: none;">Recados</a></li>
+            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;">Modalidades Esportivas</a></li>
+            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;">Eventos</a></li>
+            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;">Produtos</a></li>
+        </ul>
+        <a href="/cadastrarModalidade" style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Adicionar Modalidade</a> <!-- Botão à direita e na cor laranja -->
+    </nav>
+
+    <div class="container mt-4" style="padding: 20px;">
+        <h4>Consulta de Modalidades Esportivas</h4>
+        <p>Lista das modalidades disponíveis na Atlética</p>
+        
+        <table border="1" style="width: 100%; border-collapse: collapse;">
+            <thead style="background-color: #94210a; color: white;">
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Imagem</th>
+                    <th>Dias</th>
+                    <th>Horário</th>
+                    <th>Local</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each modalidades}}
+                    <tr>
+                        <td>{{modalidade}}</td>
+                        <td>{{descricao}}</td>
+                        <td><img src="{{imagemUrl}}" alt="{{modalidade}}" style="width: 50px;"></td>
+                        <td>{{dias}}</td>
+                        <td>{{horario}}</td>
+                        <td>{{local}}</td>
+                        <td>
+                            <a href="/editarModalidade/{{id}}" style="color: blue;">Editar</a>
+                            <a href="/excluirModalidade/{{id}}" style="color: red;">Excluir</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+ 
+    {{!-- Footer único --}}
+  
+
+    <script src="/scripts.js"></script>
+</body>
+</html>

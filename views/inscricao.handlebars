@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição - Atlética Fatec Zona Leste</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+
+    <!-- Header -->
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Inscrição</h1>
+        <p>Inscreva-se para participar da Atlética Fatec Zona Leste.</p>
+    </header>
+
+    <!-- Formulário de Inscrição -->
+    <section style="padding: 20px; display: flex; justify-content: center;">
+        <form action="/cadastrar" method="POST" style="width: 100%; max-width: 500px; padding: 20px; border: 1px solid #ddd; background-color: #fff; border-radius: 5px;">
+            <label>Nome:</label>
+            <input type="text" name="nome" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>CPF:</label>
+            <input type="text" name="cpf" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Endereço:</label>
+            <input type="text" name="endereco" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <!-- Adicione mais campos conforme necessário -->
+
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #94210a; color: white; border: none; border-radius: 5px;">
+                Enviar Inscrição
+            </button>
+        </form>
+    </section>
+
+</body>
+</html>

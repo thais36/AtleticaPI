@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Agendamentos - Consulta</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-light bg-primary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-white" href="#">SISTEMA WEB</a>
+                        <div>
+                            <a class="nav-link d-inline text-white" href="/">Home</a>
+                            <a class="nav-link d-inline text-white" href="/consulta">Consultar</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Form Title -->
+        <div class="row mt-4">
+            <div class="col">
+                <h4 class="mb-3">Consulta</h4>
+                <p>Listagem</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-primary text-white">
+                            <tr>
+                                <th scope="col" class="text-center">Nome</th>
+                                <th scope="col" class="text-center">Endereço</th>
+                                 <th scope="col" class="text-center">CEP</th>
+                                <th scope="col" class="text-center">Celular</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each posts}}
+                                {{#dataValues}}
+                                    <tr>
+                                        <td class="text-center">{{nome}}</td>
+                                        <td class="text-center">{{endereco}}</td>
+                                        <td class="text-center">{{cep}}</td>
+                                        <td class="text-center">{{celular}}</td>
+                                        <td class="text-center">
+                                            <a href="/editar/{{id}}" class="btn btn-sm btn-warning me-1">Editar</a>
+                                            <a href="/excluir/{{id}}" class="btn btn-sm btn-danger">Excluir</a>
+                                        </td>
+                                    </tr>
+                                {{/dataValues}}
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Eventos</h1>
+    </header>
+
+    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #f1f1f1; color: #333;">
+        <ul class="navbar-menu" style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
+            <li><a href="/home" style="color: #333; text-decoration: none;">Home</a></li>
+            <li><a href="/eventos" style="color: #333; text-decoration: none;">Eventos</a></li>
+            <li><a href="/loja" style="color: #333; text-decoration: none;">Loja</a></li>
+            <li><a href="/contato" style="color: #333; text-decoration: none;">Contato</a></li>
+        </ul>
+    </nav>
+
+    <section class="eventos" style="padding: 20px;">
+        <h2 style="text-align: center;">Eventos</h2>
+        <div class="eventos-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            {{#each eventos}}
+                <div class="evento-card" style="border: 1px solid #ddd; border-radius: 5px; padding: 10px; text-align: center;">
+                    <h3>{{this.nome}}</h3>
+                    <p>{{this.data}}</p>
+                    <p>{{this.horario}}</p>
+                    <p>{{this.local}}</p>
+                    <p>{{this.descricao}}</p>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+
+    <footer class="footer" style="padding: 20px; background-color: #f1f1f1; color: #333; text-align: center;">
+        <p style="margin: 0;">Atlética Fatec Zona Leste © 2024</p>
+    </footer>
+
+    <script src="/scripts.js"></script>
+</body>
+</html>
+

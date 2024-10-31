@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual - Atlética Fatec Zona Leste</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+
+    <!-- Header -->
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Loja Virtual</h1>
+        <p>Confira nossos produtos exclusivos!</p>
+    </header>
+
+    <!-- Produtos -->
+    <section class="produtos" style="padding: 20px;">
+        <div class="produtos-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            {{#each produtos}}
+                <div class="produto-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; width: 200px; text-align: center;">
+                    <img src="{{this.imagem}}" alt="{{this.nome}}" style="width: 100%; height: auto;">
+                    <h3 style="background-color: #94210a; color: white; margin: 0; padding: 10px 0;">{{this.nome}}</h3>
+                    <p style="padding: 10px;">{{this.descricao}}</p>
+                    <p style="padding: 10px; color: #94210a;"><strong>R$ {{this.preco}}</strong></p>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+
+</body>
+</html>

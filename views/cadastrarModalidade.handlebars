@@ -1,0 +1,62 @@
+{{!-- cadastrarModalidade.handlebars --}}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Modalidade</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Gestão do Sistema</h1>
+    </header>
+
+    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #f1f1f1; color: #333;">
+        <ul class="navbar-menu" style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
+            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;">Membros Inscritos</a></li>
+            <li><a href="/consultarContato" style="color: #333; text-decoration: none;">Recados</a></li>
+            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;">Modalidades Esportivas</a></li>
+            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;">Eventos</a></li>
+            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;">Produtos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-4" style="padding: 20px;">
+        <h4>Cadastrar Modalidade</h4>
+        <form action="/cadastrarModalidade" method="POST">
+            <div>
+                <label for="modalidade">Nome:</label>
+                <input type="text" name="modalidade" id="modalidade" required>
+            </div>
+            <div>
+                <label for="descricao">Descrição:</label>
+                <textarea name="descricao" id="descricao" required></textarea>
+            </div>
+            <div>
+                <label for="imagemUrl">Imagem URL:</label>
+                <input type="text" name="imagemUrl" id="imagemUrl" required>
+            </div>
+            <div>
+                <label for="dias">Dias:</label>
+                <input type="text" name="dias" id="dias" required>
+            </div>
+            <div>
+                <label for="horario">Horário:</label>
+                <input type="text" name="horario" id="horario" required>
+            </div>
+            <div>
+                <label for="local">Local:</label>
+                <input type="text" name="local" id="local" required>
+            </div>
+            <button type="submit">Cadastrar</button>
+            <a href="/consultarModalidade" style="margin-left: 10px;">Cancelar</a>
+        </form>
+    </div>
+
+    <footer class="footer" style="padding: 20px; background-color: #f1f1f1; color: #333; text-align: center;">
+        <p style="margin: 0;">Atlética Fatec Zona Leste © 2024</p>
+    </footer>
+
+    <script src="/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Agendamentos - Editar Loja</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-light bg-primary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-white" href="#">SISTEMA WEB</a>
+                        <div>
+                            <a class="nav-link d-inline text-white" href="#">Cadastrar</a>
+                            <a class="nav-link d-inline text-white" href="#">Consultar</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Form Title -->
+        <div class="row mt-4">
+            <div class="col">
+                <h4 class="mb-3">Editar - Loja</h4>
+                <p>Atualize as informações da loja.</p>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form action="/atualizarLoja" method="post">
+            {{#each lojas}}
+                <input type="hidden" id="id" name="id" value="{{id}}">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nome" class="form-label">Nome da Loja:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" value="{{nome}}" placeholder="Digite o nome da loja">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="endereco" class="form-label">Endereço:</label>
+                        <input type="text" class="form-control" id="endereco" name="endereco" value="{{endereco}}" placeholder="Digite o endereço">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="cep" class="form-label">CEP:</label>
+                        <input type="text" class="form-control" id="cep" name="cep" value="{{cep}}" placeholder="Digite o CEP">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telefone" class="form-label">Telefone:</label>
+                        <input type="text" class="form-control" id="telefone" name="telefone" value="{{telefone}}" placeholder="(00) 0000-0000">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                    </div>
+                </div>
+            {{/each}}
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

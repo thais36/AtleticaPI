@@ -1,0 +1,17 @@
+{{!-- cadastroEvento.handlebars --}}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Evento</title>
+</head>
+<body>
+    <h1>Cadastrar Evento</h1>
+    <form action="/cadastrarEvento" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <a href="/gestao">Voltar para a gestão</a>
+</body>
+</html>

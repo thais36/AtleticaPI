@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlética Fatec Zona Leste</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+    <!-- Header -->
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Atlética Fatec Zona Leste</h1>
+        <p>Fique por dentro do que acontece na Atlética Fatec Zona Leste!</p>
+    </header>
+
+    <!-- Inscrição -->
+    <div style="text-align: center; margin: 20px;">
+        <a href="/inscricao" class="inscricao-button" style="background-color: #94210a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            Inscreva-se na Atlética
+        </a>
+    </div>
+
+    <!-- Modalidades Esportivas -->
+    <section class="modalidades" style="padding: 20px;">
+        <h2 style="text-align: center;">Modalidades Esportivas</h2>
+        <div class="modalidades-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            {{#each modalidades}}
+                <div class="modalidade-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; width: 200px; text-align: center;">
+                    <img src="{{this.imagem}}" alt="{{this.nome}}" style="width: 100%; height: auto;">
+                    <h3 style="background-color: #94210a; color: white; margin: 0; padding: 10px 0;">{{this.nome}}</h3>
+                    <p style="padding: 10px;">{{this.descricao}}</p>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+
+    <!-- Localização -->
+    <section class="localizacao" style="padding: 20px; background-color: #f9f9f9;">
+        <h2 style="text-align: center;">Localização</h2>
+        <p style="text-align: center;">A FATEC Zona Leste está localizada na Avenida Águia de Haia, 2983 - Cidade A. E. Carvalho, São Paulo - SP, CEP: 03694-0001. Você pode encontrar mais informações no site oficial da FATEC Zona Leste: 
+        <a href="https://fateczl.cps.sp.gov.br/" target="_blank" style="color: #94210a;">FATEC Zona Leste</a></p>
+    </section>
+</body>
+</html>
+
+
