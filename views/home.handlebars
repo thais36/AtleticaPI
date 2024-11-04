@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atlética Fatec Zona Leste</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Espaço acima da tabela */
+        }
+        th, td {
+            text-align: center; /* Centraliza o texto */
+            padding: 10px; /* Adiciona um pouco de espaçamento */
+        }
+        th {
+            background-color: #94210a;
+            color: white;
+        }
+        .button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-button {
+            background-color: blue;
+            color: white;
+        }
+        .delete-button {
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
     <!-- Header -->
@@ -20,18 +50,39 @@
     </div>
 
     <!-- Modalidades Esportivas -->
-    <section class="modalidades" style="padding: 20px;">
-        <h2 style="text-align: center;">Modalidades Esportivas</h2>
-        <div class="modalidades-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            {{#each modalidades}}
-                <div class="modalidade-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; width: 200px; text-align: center;">
-                    <img src="{{this.imagem}}" alt="{{this.nome}}" style="width: 100%; height: auto;">
-                    <h3 style="background-color: #94210a; color: white; margin: 0; padding: 10px 0;">{{this.nome}}</h3>
-                    <p style="padding: 10px;">{{this.descricao}}</p>
-                </div>
-            {{/each}}
-        </div>
-    </section>
+ 
+
+    <!-- Tabela de Modalidades -->
+    <div class="container" style="padding: 20px;">
+        <p>Lista das modalidades disponíveis na Atlética</p>
+        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Dias</th>
+                    <th>Horário</th>
+                    <th>Local</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if modalidades.length}}
+                    {{#each modalidades}}
+                    <tr>
+                        <td>{{this.modalidade}}</td>
+                        <td>{{this.descricao}}</td>
+                        <td>{{this.dias}}</td>
+                        <td>{{this.horario}}</td>
+                        <td>{{this.local}}</td>
+                    </tr>
+                    {{/each}}
+                {{else}}
+                    <tr><td colspan="6" style="text-align: center;">Nenhuma modalidade encontrada.</td></tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
 
     <!-- Localização -->
     <section class="localizacao" style="padding: 20px; background-color: #f9f9f9;">
@@ -41,5 +92,3 @@
     </section>
 </body>
 </html>
-
-

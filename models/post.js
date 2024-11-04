@@ -2,9 +2,6 @@ const db = require("./banco");
 
 // Modalidades
 const Modalidade = db.sequelize.define('modalidades', {
-    imagemUrl: {  
-        type: db.Sequelize.STRING
-    },
     modalidade: {
         type: db.Sequelize.STRING
     },
@@ -50,9 +47,6 @@ const Inscricao = db.sequelize.define('inscricoes', {
     },
     email: {
         type: db.Sequelize.STRING
-    },
-    aluno: {
-        type: db.Sequelize.BOOLEAN
     },
     curso: {
         type: db.Sequelize.STRING
