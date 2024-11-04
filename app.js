@@ -78,12 +78,8 @@ app.get("/gestao", (req, res) => {
 });
 
 // Rotas para CRUD de Modalidades
-app.get("/consultarModalidade", (req, res) => {
-    Modalidade.findAll()
-        .then((modalidades) => {
-            res.render("consultarModalidade", { modalidades: modalidades });
-        })
-        .catch((erro) => res.send("Erro ao carregar as modalidades: " + erro));
+app.get("/cadastrarModalidade", (req, res) => {
+    res.render("cadastrarModalidade");
 });
 
 app.post("/cadastrarModalidade", (req, res) => {
@@ -95,30 +91,14 @@ app.post("/cadastrarModalidade", (req, res) => {
         .catch((erro) => res.send("Erro ao cadastrar modalidade: " + erro));
 });
 
-app.get('/editarModalidade/:id', (req, res) => {
-    const id = req.params.id;
-    // Buscar a modalidade pelo id no banco de dados e passar para o template de edição
-    Modalidade.findByPk(id)
-        .then((modalidade) => {
-            if (!modalidade) {
-                return res.status(404).send('Modalidade não encontrada');
-            }
-            res.render('editarModalidade', { modalidade });
+app.get("/consultarModalidade", (req, res) => {
+    Modalidade.findAll()
+        .then((modalidades) => {
+            res.render("consultarModalidade", { modalidades });
         })
-        .catch((erro) => res.status(500).send('Erro ao buscar a modalidade: ' + erro));
+        .catch((erro) => res.send("Erro ao carregar as modalidades: " + erro));
 });
 
-app.post("/atualizarModalidade", (req, res) => {
-    Modalidade.update(req.body, { where: { id: req.body.id } })
-        .then(() => res.redirect("/consultarModalidade"))
-        .catch((erro) => res.send("Erro ao atualizar modalidade: " + erro));
-});
-
-app.get("/excluirModalidade/:id", (req, res) => {
-    Modalidade.destroy({ where: { id: req.params.id } })
-        .then(() => res.redirect("/consultarModalidade"))
-        .catch((erro) => res.send("Erro ao excluir modalidade: " + erro));
-});
 
 // Rotas para CRUD de Inscrições
 app.get("/consultarInscricao", (req, res) => {

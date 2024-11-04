@@ -3,35 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscrição - Atlética Fatec Zona Leste</title>
+    <title>Consultar Inscrições</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: center; /* Centraliza o texto */
+            padding: 10px; /* Adiciona um pouco de espaçamento */
+        }
+        th {
+            background-color: #94210a;
+            color: white;
+        }
+        .button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .edit-button {
+            background-color: blue;
+            color: white;
+        }
+        .delete-button {
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
-
-    <!-- Header -->
     <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
-        <h1>Inscrição</h1>
-        <p>Inscreva-se para participar da Atlética Fatec Zona Leste.</p>
+        <h1>Gestão do Sistema</h1>
     </header>
 
-    <!-- Formulário de Inscrição -->
-    <section style="padding: 20px; display: flex; justify-content: center;">
-        <form action="/cadastrar" method="POST" style="width: 100%; max-width: 500px; padding: 20px; border: 1px solid #ddd; background-color: #fff; border-radius: 5px;">
-            <label>Nome:</label>
-            <input type="text" name="nome" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #f1f1f1; color: #333;">
+        <ul class="navbar-menu" style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
+            <li><a href="/" style="color: #333; text-decoration: none;">Home</a></li>
+            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;">Membros Inscritos</a></li>
+            <li><a href="/consultarContato" style="color: #333; text-decoration: none;">Recados</a></li>
+            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;">Modalidades Esportivas</a></li>
+            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;">Eventos</a></li>
+            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;">Produtos</a></li>
+        </ul>
+        <a href="/cadastrarInscricao" style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Adicionar Inscrição</a>
+    </nav>
 
-            <label>CPF:</label>
-            <input type="text" name="cpf" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
-
-            <label>Endereço:</label>
-            <input type="text" name="endereco" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
-
-            <!-- Adicione mais campos conforme necessário -->
-
-            <button type="submit" style="width: 100%; padding: 10px; background-color: #94210a; color: white; border: none; border-radius: 5px;">
-                Enviar Inscrição
-            </button>
-        </form>
-    </section>
+    <div class="container mt-4" style="padding: 20px;">
+        <h4>Consulta de Inscrições</h4>
+        <p>Lista dos membros inscritos na Atlética</p>
+        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>CEP</th>
+                    <th>Celular</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if posts.length}}
+                    {{#each posts}}
+                    <tr>
+                        <td>{{this.nome}}</td>
+                        <td>{{this.endereco}}</td>
+                        <td>{{this.cep}}</td>
+                        <td>{{this.celular}}</td>
+                        <td>
+                            <a href="/editar/{{this.id}}" class="button edit-button">Editar</a>
+                            <form action="/excluir/{{this.id}}" method="POST" style="display:inline;">
+                                <button type="submit" class="button delete-button">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {{/each}}
+                {{else}}
+                    <tr><td colspan="5" style="text-align: center;">Nenhuma inscrição encontrada.</td></tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>
+
