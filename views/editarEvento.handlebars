@@ -1,9 +1,12 @@
+{{!-- editarEvento.handlebars --}}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Evento</title>
+    <title>Gestão do Sistema - Editar Evento</title>
     <style>
         body {
             font-family: Arial, sans-serif; 
@@ -11,12 +14,14 @@
             padding: 0; 
             background-color: #FFFFE0;
         }
+
         .header {
             background-color: #94210a; 
             padding: 20px; 
             text-align: center; 
             color: white;
         }
+
         .navbar {
             display: flex; 
             justify-content: space-between; 
@@ -25,6 +30,7 @@
             background-color: #f1f1f1; 
             color: #333;
         }
+
         .navbar-menu {
             list-style: none; 
             display: flex; 
@@ -32,6 +38,7 @@
             margin: 0; 
             padding: 0;
         }
+
         .container {
             padding: 20px; 
             max-width: 600px; 
@@ -41,18 +48,23 @@
             box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
             background-color: white;
         }
+
         label {
             margin-top: 5px; 
+           
             display: block;
         }
-        input[type="text"], input[type="date"], input[type="time"], textarea {
-            width: 100%; 
-            padding: 10px; 
-            margin-top: 3px; 
-            margin-bottom: 10px; 
-            border: 1px solid #ccc; 
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 3px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
             border-radius: 4px;
         }
+        
         button {
             background-color: #94210a; 
             color: white; 
@@ -61,18 +73,21 @@
             border-radius: 4px; 
             cursor: pointer;
         }
+
         button:hover {
             background-color: #7b1d0c;
         }
+
         .button-container {
             text-align: center; 
             margin-top: 15px;
         }
     </style>
 </head>
+
 <body>
     <header class="header">
-        <h1>Gestão do Sistema</h1>
+        <h1>Gestão do Sistema -Editar Evento</h1>
     </header>
 
     <nav class="navbar">
@@ -87,34 +102,43 @@
 
     <div class="container">
         <h4>Editar Evento</h4>
-        <form action="/editarEvento/{{evento.id}}" method="POST">
+        <form action="/atualizarEvento/{{evento.id}}" method="POST">
             <input type="hidden" name="id" value="{{evento.id}}">
 
-            <div>
-                <label for="nome">Nome do Evento:</label>
-                <input type="text" name="nome" id="nome" value="{{evento.nome}}" placeholder="Ex: Campeonato Regional" required>
+             <div>
+                <label for="evento">Nome do Evento/Campeonato:</label>
+                <input type="text" name="evento" id="evento" value="{{evento.evento}}" placeholder="Ex: Festa, Inter-FATEC, Recepção de Calouros, Palestra, etc." required>
             </div>
             <div>
                 <label for="descricao">Descrição:</label>
-                <textarea name="descricao" id="descricao" placeholder="Descreva o evento brevemente" required>{{evento.descricao}}</textarea>
+                <textarea name="descricao" id="descricao" placeholder="Descreva brevemente o evento; Ex: Se é gratuito ou Pago, valor, restrições, etc" 
+                required>{{evento.descricao}}</textarea>
             </div>
             <div>
-                <label for="data">Data do Evento:</label>
-                <input type="date" name="data" id="data" value="{{evento.data}}" required>
+                <label for="dias">Dias do Evento/Campeonato:</label>
+                <input type="text" name="dias" id="dias" value="{{evento.dias}}"
+                placeholder="Ex: 11/12/2024 a 15/12/2024" required>
             </div>
             <div>
-                <label for="hora">Horário do Evento:</label>
-                <input type="time" name="hora" id="hora" value="{{evento.hora}}" required>
+                <label for="horario">Horários do Evento/Campeonato:</label>
+                <input type="text" name="horario" id="horario" value="{{evento.horario}}"
+                placeholder="Ex: 18:00 - 20:00" required>
             </div>
             <div>
                 <label for="local">Local:</label>
-                <input type="text" name="local" id="local" value="{{evento.local}}" placeholder="Ex: Ginásio Municipal" required>
+                <input type="text" name="local" id="local"  value="{{evento.local}}"               
+                 placeholder="Ex: FATEC Zona Leste, Salão de Festa" required>
             </div>
+
             <div class="button-container">
-                <button type="submit">Salvar Alterações</button>
-                <a href="/consultarEvento" style="margin-left: 10px;">Cancelar</a>
+                <form action="/deletarEvento/{{evento.id}}" method="POST"
+                    onsubmit="return confirm('Tem certeza que deseja excluir este Evento ou Campeonato?');">
+                    <button type="submit">Atualizar</button>
+                    <button type="submit">Cancelar</button>
+                </form>
             </div>
         </form>
     </div>
+    
 </body>
 </html>

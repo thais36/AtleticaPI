@@ -3,91 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Inscrições</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+    <title>Inscrição - Atlética Fatec Zona Leste</title>
+    <script>
+        function validarFormulario() {
+            const cpf = document.forms["inscricao"]["cpf"].value;
+            const cep = document.forms["inscricao"]["cep"].value;
+
+            // Validação de CPF (simplificada)
+            if (!validarCPF(cpf)) {
+                alert("CPF inválido. Deve conter 11 dígitos.");
+                return false;
+            }
+
+            // Validação de CEP (formato XXXXX-XXX)
+            const cepPattern = /^[0-9]{5}-[0-9]{3}$/;
+            if (!cepPattern.test(cep)) {
+                alert("CEP inválido. Formato esperado: XXXXX-XXX");
+                return false;
+            }
+
+            return true; // O formulário pode ser enviado
         }
-        th, td {
-            text-align: center; /* Centraliza o texto */
-            padding: 10px; /* Adiciona um pouco de espaçamento */
+
+        function validarCPF(cpf) {
+            if (cpf.length !== 11 || !/^\d+$/.test(cpf)) {
+                return false;
+            }
+            // Verificação de dígitos verificadores (simplificada)
+            return true;
         }
-        th {
-            background-color: #94210a;
-            color: white;
+
+        function enviarFormulario(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Salvo com sucesso!");
+                    setTimeout(() => {
+                        window.location.href = '/consultarInscricao'; // Redireciona após 2 segundos
+                    }, 2000);
+                } else {
+                    throw new Error("Erro ao cadastrar inscrição.");
+                }
+            })
+            .catch(error => {
+                alert("Erro: " + error.message);
+            });
         }
-        .button {
-            padding: 5px 10px;
-            margin: 0 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .edit-button {
-            background-color: blue;
-            color: white;
-        }
-        .delete-button {
-            background-color: red;
-            color: white;
-        }
-    </style>
+    </script>
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+
+    <!-- Header -->
     <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
-        <h1>Gestão do Sistema</h1>
+        <h1>Inscreva-se para participar da Atlética Fatec Zona Leste</h1>
+        <p>* Inscrição somente para alunos da FATEC Zona Leste.</p>
     </header>
 
-    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #f1f1f1; color: #333;">
-        <ul class="navbar-menu" style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
-            <li><a href="/" style="color: #333; text-decoration: none;">Home</a></li>
-            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;">Membros Inscritos</a></li>
-            <li><a href="/consultarContato" style="color: #333; text-decoration: none;">Recados</a></li>
-            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;">Modalidades Esportivas</a></li>
-            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;">Eventos</a></li>
-            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;">Produtos</a></li>
-        </ul>
-        <a href="/cadastrarInscricao" style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Adicionar Inscrição</a>
-    </nav>
+    <!-- Formulário de Inscrição -->
+    <section style="padding: 20px; display: flex; justify-content: center;">
+        <form name="inscricao" id="inscricao" action="/cadastrarInscricao" method="POST" onsubmit="return validarFormulario()" style="width: 100%; max-width: 500px; padding: 20px; border: 1px solid #ddd; background-color: #fff; border-radius: 5px;">
+            <label>Nome:</label>
+            <input type="text" name="nome" placeholder="Digite seu nome completo" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
 
-    <div class="container mt-4" style="padding: 20px;">
-        <h4>Consulta de Inscrições</h4>
-        <p>Lista dos membros inscritos na Atlética</p>
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>CEP</th>
-                    <th>Celular</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#if posts.length}}
-                    {{#each posts}}
-                    <tr>
-                        <td>{{this.nome}}</td>
-                        <td>{{this.endereco}}</td>
-                        <td>{{this.cep}}</td>
-                        <td>{{this.celular}}</td>
-                        <td>
-                            <a href="/editar/{{this.id}}" class="button edit-button">Editar</a>
-                            <form action="/excluir/{{this.id}}" method="POST" style="display:inline;">
-                                <button type="submit" class="button delete-button">Excluir</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {{/each}}
-                {{else}}
-                    <tr><td colspan="5" style="text-align: center;">Nenhuma inscrição encontrada.</td></tr>
-                {{/if}}
-            </tbody>
-        </table>
-    </div>
+            <label>CPF:</label>
+            <input type="text" name="cpf" placeholder="Digite seu CPF (somente números)" pattern="\d{11}" maxlength="11" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Endereço:</label>
+            <input type="text" name="endereco" placeholder="Digite seu endereço" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Bairro:</label>
+            <input type="text" name="bairro" placeholder="Digite seu bairro" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>CEP:</label>
+            <input type="text" name="cep" placeholder="Digite seu CEP (XXXXX-XXX)" pattern="\d{5}-\d{3}" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Cidade:</label>
+            <input type="text" name="cidade" placeholder="Digite sua cidade" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Estado:</label>
+            <input type="text" name="estado" placeholder="Digite seu estado" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Celular:</label>
+            <input type="text" name="celular" placeholder="Digite seu celular (somente números)" pattern="\d{11}" maxlength="11" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Digite seu email" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Curso:</label>
+            <input type="text" name="curso" placeholder="Digite seu curso" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Turno:</label>
+            <input type="text" name="turno" placeholder="ex: Manhã, Tarde, Noite" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Semestre:</label>
+            <input type="number" name="periodo" placeholder="Digite seu semestre" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #94210a; color: white; border: none; border-radius: 5px;">
+                Enviar
+            </button>
+            <button type="button" onclick="window.location.href='/'" style="width: 100%; padding: 10px; background-color: #ddd; color: black; border: none; border-radius: 5px; margin-top: 10px;">
+                Cancelar
+            </button>
+        </form>
+    </section>
 
 </body>
 </html>
-

@@ -7,6 +7,17 @@
 </head>
 <body>
     <h1>Cadastrar Produto na Loja</h1>
+
+<nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 100px; background-color: #f1f1f1; color: #333;">
+    <ul class="navbar-menu" style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; width: 100%; justify-content: space-between;">
+        <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;" class="navbar-link">Membros Inscritos</a></li>
+        <li><a href="/consultarContato" style="color: #333; text-decoration: none;" class="navbar-link">Recados</a></li>
+        <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;" class="navbar-link">Modalidades Esportivas</a></li>
+        <li><a href="/consultarEvento" style="color: #333; text-decoration: none;" class="navbar-link">Eventos e Campeonatos</a></li>
+        <li><a href="/consultarLoja" style="color: #333; text-decoration: none;" class="navbar-link">Produtos da Loja</a></li>
+    </ul>
+</nav>
+
     <form action="/cadastrarLoja" method="POST">
         <label for="nome">Nome:</label>
         <input type="text" name="nome" id="nome" required>

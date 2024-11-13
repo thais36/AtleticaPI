@@ -1,3 +1,5 @@
+{{!-- consultarEvento.handlebars --}}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -11,13 +13,13 @@
             padding: 0; 
             background-color: #FFFFE0;
         }
-        .header {
+        header {
             background-color: #94210a; 
             padding: 20px; 
             text-align: center; 
             color: white;
         }
-        .navbar {
+        nav {
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
@@ -41,6 +43,13 @@
             border-radius: 5px; 
             box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
         }
+         .add-button {
+            padding: 10px 20px; 
+            background-color: green; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+        }
         table {
             width: 100%; 
             border-collapse: collapse; 
@@ -51,74 +60,91 @@
             border: 1px solid #ddd; 
             text-align: left;
         }
+         th, td {
+            text-align: center; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+        }
         th {
             background-color: #94210a; 
             color: white;
         }
-        .button-container {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        button, .add-event-btn {
-            background-color: #94210a; 
-            color: white; 
-            padding: 10px 15px; 
+         .button {
+            padding: 5px 10px; 
+            margin: 0 5px; 
             border: none; 
-            border-radius: 4px; 
+            border-radius: 5px; 
             cursor: pointer;
-            text-decoration: none;
         }
-        button:hover, .add-event-btn:hover {
-            background-color: #7b1d0c;
+        
+        .edit-button {
+            background-color: blue; 
+            color: white;
+        }
+        .delete-button {
+            background-color: red; 
+            color: white;
         }
     </style>
+
 </head>
 <body>
     <header class="header">
-        <h1>Gestão do Sistema</h1>
+        <h1>Gestão do Sistema - Evento</h1>
     </header>
 
-    <nav class="navbar">
-        <ul class="navbar-menu">
-            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;">Membros Inscritos</a></li>
-            <li><a href="/consultarContato" style="color: #333; text-decoration: none;">Recados</a></li>
-            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;">Modalidades Esportivas</a></li>
-            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;">Eventos</a></li>
-            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;">Produtos</a></li>
-        </ul>
-    </nav>
+<nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 100px; background-color: #f1f1f1; color: #333;">
+    <ul class="navbar-menu" style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; width: 100%; justify-content: space-between;">
+        <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;" class="navbar-link">Membros Inscritos</a></li>
+        <li><a href="/consultarContato" style="color: #333; text-decoration: none;" class="navbar-link">Recados</a></li>
+        <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;" class="navbar-link">Modalidades Esportivas</a></li>
+        <li><a href="/consultarEvento" style="color: #333; text-decoration: none;" class="navbar-link">Eventos e Campeonatos</a></li>
+        <li><a href="/consultarLoja" style="color: #333; text-decoration: none;" class="navbar-link">Produtos da Loja</a></li>
+    </ul>
+</nav>
 
-    <div class="container">
-        <div class="button-container">
-            <h4>Lista de Eventos</h4>
-            <a href="/cadastrarEvento" class="add-event-btn">Cadastrar Evento</a>
-        </div>
+   <div class="container" style="padding: 20px;">
+        <h4>Consulta de Eventos e Campeonatos</h4>
+        <div style="text-align: right;">
+    <a href="/cadastrarEvento" style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Adicionar Evento ou Campeonato</a>
+</div>
+        <p>Lista das eventos e campeonatos disponíveis na Atlética</p>
         
         <table>
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Dias</th>
+                    <th>Horário</th>
                     <th>Local</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                {{#each eventos}}
-                <tr>
-                    <td>{{this.nome}}</td>
-                    <td>{{this.data}}</td>
-                    <td>{{this.local}}</td>
-                    <td>
-                        <a href="/editarEvento/{{this.id}}" style="color: #333; text-decoration: none;">Editar</a> |
-                        <a href="/excluirEvento/{{this.id}}" style="color: #94210a; text-decoration: none;" onclick="return confirm('Tem certeza que deseja excluir este evento?');">Excluir</a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
+      <tbody>
+    {{#each eventos}}
+    <tr>
+        <td>{{this.evento}}</td>
+        <td>{{this.descricao}}</td>
+        <td>{{this.dias}}</td>
+        <td>{{this.horario}}</td>
+        <td>{{this.local}}</td>
+        <td>
+            <a href="/editarEvento/{{this.id}}" class="button edit-button">Editar</a>
+            <form action="/deletarEvento/{{this.id}}" method="POST" style="display:inline;">
+                <button type="submit" class="button delete-button" onclick="return confirm('Deseja excluir este evento ou campeonato?')">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    {{else}}
+    <tr>
+        <td colspan="6">Nenhum evento ou campeonato encontrado.</td>
+    </tr>
+    {{/each}}
+</tbody>
+
         </table>
     </div>
+
 </body>
 </html>

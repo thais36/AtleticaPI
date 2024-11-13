@@ -1,76 +1,92 @@
 {{!-- editarModalidade.handlebars --}}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Modalidade</title>
+    <title>Gestão do Sistema - Editar Modalidade</title>
     <style>
         body {
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #FFFFE0;
         }
+
         .header {
-            background-color: #94210a; 
-            padding: 20px; 
-            text-align: center; 
+            background-color: #94210a;
+            padding: 20px;
+            text-align: center;
             color: white;
         }
+
         .navbar {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 10px 20px; 
-            background-color: #f1f1f1; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f1f1f1;
             color: #333;
         }
+
         .navbar-menu {
-            list-style: none; 
-            display: flex; 
-            gap: 100px; 
-            margin: 0; 
+            list-style: none;
+            display: flex;
+            gap: 100px;
+            margin: 0;
             padding: 0;
         }
+
         .container {
-            padding: 20px; 
-            max-width: 600px; 
-            margin: 20px auto; /* Alterado para criar um espaço acima */
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            /* Alterado para criar um espaço acima */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
             background-color: white;
         }
+
         label {
-            margin-top: 5px; 
+            margin-top: 5px;
             display: block;
         }
-        input[type="text"], textarea {
-            width: 100%; 
-            padding: 10px; 
-            margin-top: 3px; 
-            margin-bottom: 10px; 
-            border: 1px solid #ccc; 
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 3px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         button {
-            background-color: #94210a; 
-            color: white; 
-            padding: 10px 15px; 
-            border: none; 
-            border-radius: 4px; 
+            background-color: #94210a;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #7b1d0c;
         }
+
         .button-container {
-            text-align: center; /* Centraliza os botões */
-            margin-top: 15px; /* Espaço acima dos botões */
+            text-align: center;
+            /* Centraliza os botões */
+            margin-top: 15px;
+            /* Espaço acima dos botões */
         }
     </style>
 </head>
+
 <body>
     <header class="header">
         <h1>Gestão do Sistema</h1>
@@ -93,31 +109,41 @@
 
             <div>
                 <label for="modalidade">Nome da Modalidade Esportiva:</label>
-                <input type="text" name="modalidade" id="modalidade" value="{{modalidade.modalidade}}" placeholder="Ex: Futebol, Voleibol" required>
+                <input type="text" name="modalidade" id="modalidade" value="{{modalidade.modalidade}}"
+                    placeholder="Ex: Futebol, Voleibol" required>
             </div>
             <div>
                 <label for="descricao">Descrição:</label>
-                <textarea name="descricao" id="descricao" placeholder="Descreva brevemente a modalidade" required>{{modalidade.descricao}}</textarea>
+                <textarea name="descricao" id="descricao" placeholder="Descreva brevemente a modalidade; quem procurar para se inscrever; etc."
+                    required>{{modalidade.descricao}}</textarea>
             </div>
             <div>
                 <label for="dias">Dias da Semana dos Treinos:</label>
-                <input type="text" name="dias" id="dias" value="{{modalidade.dias}}" placeholder="Ex: Segunda, Quarta, Sexta" required>
+                <input type="text" name="dias" id="dias" value="{{modalidade.dias}}"
+                    placeholder="Ex: Segunda, Quarta, Sexta" required>
             </div>
             <div>
                 <label for="horario">Horários dos Treinos:</label>
-                <input type="text" name="horario" id="horario" value="{{modalidade.horario}}" placeholder="Ex: 18:00 - 20:00" required>
+                <input type="text" name="horario" id="horario" value="{{modalidade.horario}}"
+                    placeholder="Ex: 18:00 - 20:00" required>
             </div>
             <div>
                 <label for="local">Local:</label>
-                <input type="text" name="local" id="local" value="{{modalidade.local}}" placeholder="Ex: Quadra Poliesportiva" required>
+                <input type="text" name="local" id="local" value="{{modalidade.local}}"
+                    placeholder="Ex: Quadra Poliesportiva" required>
             </div>
-            <div class="button-container"> <!-- Adicionada nova div para centralizar os botões -->
-                <button type="submit">Atualizar Modalidade</button>
-                <a href="/consultarModalidade" style="margin-left: 10px;">Cancelar</a>
+
+            <div class="button-container">
+                <form action="/deletarModalidade/{{modalidade.id}}" method="POST"
+                    onsubmit="return confirm('Tem certeza que deseja excluir esta modalidade?');">
+                    <button type="submit">Atualizar</button>
+                    <button type="submit">Cancelar</button>
+                </form>
             </div>
         </form>
     </div>
 
     <script src="/scripts.js"></script>
 </body>
+
 </html>

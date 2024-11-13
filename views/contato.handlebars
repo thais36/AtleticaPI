@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição - Atlética Fatec Zona Leste</title>
+    <script>
+           
+        function enviarFormulario(event) {
+            event.preventDefault(); // Previne o envio do formulário
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Salvo com sucesso!");
+                    setTimeout(() => {
+                        window.location.href = '/'; 
+                    }, 2000);
+                } else {
+                    throw new Error("Erro ao cadastrar inscrição.");
+                }
+            })
+            .catch(error => {
+                alert("Erro: " + error.message);
+            });
+        }
+    </script>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+
+    <!-- Header -->
+    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
+        <h1>Contato Atlética Fatec Zona Leste</h1>
+        <p>Deixe abaixo a sua mensagem:</p>
+    </header>
+
+    <!-- Formulário de Inscrição -->
+    <section style="padding: 20px; display: flex; justify-content: center;">
+        <form name="inscricao" id="inscricao" action="/cadastrarInscricao" method="POST" onsubmit="return validarFormulario()" style="width: 100%; max-width: 500px; padding: 20px; border: 1px solid #ddd; background-color: #fff; border-radius: 5px;">
+            <label>Nome:</label>
+            <input type="text" name="nome" placeholder="Digite seu nome completo" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Digite seu email" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Telefone:</label>
+            <input type="tel" name="telefone" placeholder="Digite seu telefone" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+            <label>Mensagem:</label>
+            <textarea name="mensagem" placeholder="Digite sua mensagem" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></textarea>
+
+
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #94210a; color: white; border: none; border-radius: 5px;">
+                Enviar
+            </button>
+            <button type="button" onclick="window.location.href='/'" style="width: 100%; padding: 10px; background-color: #ddd; color: black; border: none; border-radius: 5px; margin-top: 10px;">
+                Cancelar
+            </button>
+        </form>
+    </section>
+
+</body>
+</html>

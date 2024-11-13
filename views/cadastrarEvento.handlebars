@@ -1,3 +1,5 @@
+{{!-- cadastrarEvento.handlebars --}}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -35,7 +37,7 @@
         .container {
             padding: 20px; 
             max-width: 600px; 
-            margin: 20px auto;
+            margin: 20px auto; /* Espaço acima */
             border: 1px solid #ddd; 
             border-radius: 5px; 
             box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
@@ -45,7 +47,7 @@
             margin-top: 5px; 
             display: block;
         }
-        input[type="text"], input[type="date"], input[type="time"], textarea {
+        input[type="text"], textarea {
             width: 100%; 
             padding: 10px; 
             margin-top: 3px; 
@@ -65,54 +67,58 @@
             background-color: #7b1d0c;
         }
         .button-container {
-            text-align: center; 
-            margin-top: 15px;
+            text-align: center; /* Centraliza os botões */
+            margin-top: 15px; /* Espaço acima dos botões */
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <h1>Gestão do Sistema</h1>
+        <h1>Gestão do Sistema - Eventos e Campeonatos</h1>
     </header>
 
-    <nav class="navbar">
-        <ul class="navbar-menu">
-            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;">Membros Inscritos</a></li>
-            <li><a href="/consultarContato" style="color: #333; text-decoration: none;">Recados</a></li>
-            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;">Modalidades Esportivas</a></li>
-            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;">Eventos</a></li>
-            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;">Produtos</a></li>
-        </ul>
-    </nav>
+<nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 100px; background-color: #f1f1f1; color: #333;">
+    <ul class="navbar-menu" style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; width: 100%; justify-content: space-between;">
+        <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;" class="navbar-link">Membros Inscritos</a></li>
+        <li><a href="/consultarContato" style="color: #333; text-decoration: none;" class="navbar-link">Recados</a></li>
+        <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;" class="navbar-link">Modalidades Esportivas</a></li>
+        <li><a href="/consultarEvento" style="color: #333; text-decoration: none;" class="navbar-link">Eventos e Campeonatos</a></li>
+        <li><a href="/consultarLoja" style="color: #333; text-decoration: none;" class="navbar-link">Produtos da Loja</a></li>
+    </ul>
+</nav>
 
     <div class="container">
-        <h4>Cadastrar Evento</h4>
+        <h4>Cadastrar Evento ou Campeonato </h4>
         <form action="/cadastrarEvento" method="POST">
+
             <div>
-                <label for="nome">Nome do Evento:</label>
-                <input type="text" name="nome" id="nome" placeholder="Ex: Campeonato Regional" required>
+                <label for="evento">Nome do Evento/Campeonato:</label>
+                <input type="text" name="evento" id="evento" placeholder="Ex: Festa, Inter-FATEC, Recepção de Calouros, Palestra, etc." required>
             </div>
             <div>
                 <label for="descricao">Descrição:</label>
-                <textarea name="descricao" id="descricao" placeholder="Descreva o evento brevemente" required></textarea>
+                <textarea name="descricao" id="descricao" placeholder="Descreva brevemente o evento; Ex: Se é gratuito ou Pago, valor, restrições, etc" required></textarea>
             </div>
             <div>
-                <label for="data">Data do Evento:</label>
-                <input type="date" name="data" id="data" required>
+                <label for="dias">Dias do Evento/Campeonato:</label>
+                <input type="text" name="dias" id="dias" placeholder="Ex: 11/12/2024 a 15/12/2024" required>
             </div>
             <div>
-                <label for="hora">Horário do Evento:</label>
-                <input type="time" name="hora" id="hora" required>
+                <label for="horario">Horários do Evento/Campeonato:</label>
+                <input type="text" name="horario" id="horario" placeholder="Ex: 18:00 - 20:00" required>
             </div>
             <div>
                 <label for="local">Local:</label>
-                <input type="text" name="local" id="local" placeholder="Ex: Ginásio Municipal" required>
+                <input type="text" name="local" id="local" placeholder="Ex: FATEC Zona Leste, Salão de Festa" required>
             </div>
+
             <div class="button-container">
                 <button type="submit">Cadastrar</button>
                 <a href="/consultarEvento" style="margin-left: 10px;">Cancelar</a>
             </div>
         </form>
     </div>
+
+    <script src="/scripts.js"></script>
 </body>
 </html>

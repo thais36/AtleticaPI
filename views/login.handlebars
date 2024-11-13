@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFE0;
+        }
+        .header {
+            background-color: #94210a;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+            gap: 20px;
+        }
+        .navbar a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .banner {
+            background-color: #94210a;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .login-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        .login-box h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .login-box label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #94210a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .login-box button:hover {
+            background-color: #b33c2e;
+        }
+    </style>
+</head>
+<body>
+
+  
+    <!-- Banner -->
+    <div class="banner">Login</div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Bem-vindo ao sistema!</h1>
+            <form action="/login" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

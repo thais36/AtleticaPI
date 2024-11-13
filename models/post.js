@@ -1,132 +1,73 @@
-const db = require("./banco");
+const { sequelize, Sequelize } = require("./banco"); // Corrigido para importar sequelize
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 
-// Modalidades
-const Modalidade = db.sequelize.define('modalidades', {
-    modalidade: {
-        type: db.Sequelize.STRING
-    },
-    descricao: {
-        type: db.Sequelize.STRING
-    },
-    dias: {
-        type: db.Sequelize.STRING
-    },
-    horario: {
-        type: db.Sequelize.STRING
-    },
-    local: {
-        type: db.Sequelize.STRING
-    }
+// Modelo de Modalidade
+const Modalidade = sequelize.define('modalidades', {
+    modalidade: { type: Sequelize.STRING },
+    descricao: { type: Sequelize.STRING },
+    dias: { type: Sequelize.STRING },
+    horario: { type: Sequelize.STRING },
+    local: { type: Sequelize.STRING }
 });
 
-//Inscrições
-const Inscricao = db.sequelize.define('inscricoes', {
-    nome: {
-        type: db.Sequelize.STRING
-    },
-    cpf: {
-        type: db.Sequelize.STRING
-    },
-    endereco: {
-        type: db.Sequelize.STRING
-    },
-    bairro: {
-        type: db.Sequelize.STRING
-    },
-    cep: {
-        type: db.Sequelize.INTEGER
-    },
-    cidade: {
-        type: db.Sequelize.STRING
-    },
-    estado: {
-        type: db.Sequelize.STRING
-    },
-    celular: {
-        type: db.Sequelize.STRING
-    },
-    email: {
-        type: db.Sequelize.STRING
-    },
-    curso: {
-        type: db.Sequelize.STRING
-    },
-    turno: {
-        type: db.Sequelize.STRING
-    },
-    periodo: {
-        type: db.Sequelize.INTEGER
-    }
+// Modelo de Evento
+const Evento = sequelize.define('eventos', {
+    evento: { type: Sequelize.STRING },
+    descricao: { type: Sequelize.STRING },
+    dias: { type: Sequelize.STRING },
+    horario: { type: Sequelize.STRING },
+    local: { type: Sequelize.STRING },
 });
 
-//Contatos
-const Contato = db.sequelize.define('contatos', {
-    nome: {
-        type: db.Sequelize.STRING
-    },
-    email: {
-        type: db.Sequelize.STRING
-    },
-    telefone: {
-        type: db.Sequelize.STRING
-    },
-    mensagem: {
-        type: db.Sequelize.TEXT
-    }
+// Modelo de Inscrição
+const Inscricao = sequelize.define('inscricoes', {
+    nomeInscricao: { type: Sequelize.STRING },
+    cpf: { type: Sequelize.STRING },
+    endereco: { type: Sequelize.STRING },
+    bairro: { type: Sequelize.STRING },
+    cep: { type: Sequelize.STRING },
+    cidade: { type: Sequelize.STRING },
+    estado: { type: Sequelize.STRING },
+    celular: { type: Sequelize.STRING },
+    email: { type: Sequelize.STRING },
+    curso: { type: Sequelize.STRING },
+    turno: { type: Sequelize.STRING },
+    periodo: { type: Sequelize.INTEGER }
 });
 
-//Loja
-const Loja = db.sequelize.define('lojas', {
-    imagemUrl: {
-        type: db.Sequelize.STRING
-    },
-    nome: {
-        type: db.Sequelize.STRING
-    },
-    descricao: {
-        type: db.Sequelize.STRING
-    },
-    preco: {
-        type: db.Sequelize.DECIMAL(10, 2)
-    }
+// Modelo de Contato
+const Contato = sequelize.define('contatos', {
+    nome: { type: Sequelize.STRING },
+    email: { type: Sequelize.STRING },
+    telefone: { type: Sequelize.STRING },
+    mensagem: { type: Sequelize.TEXT }
 });
 
-// Eventos
-const Evento = db.sequelize.define('eventos', {
-    imagemUrl: {
-        type: db.Sequelize.STRING
-    },
-    nome: {
-        type: db.Sequelize.STRING
-    },
-    data: {
-        type: db.Sequelize.DATE
-    },
-    horario: {
-        type: db.Sequelize.STRING
-    },
-    local: {
-        type: db.Sequelize.STRING
-    },
-    descricao: {
-        type: db.Sequelize.STRING
-    }
+// Modelo de Loja
+const Loja = sequelize.define('lojas', {
+    imagemUrl: { type: Sequelize.STRING, allowNull: true },
+    nomeProduto: { type: Sequelize.STRING },
+    descricaoProduto: { type: Sequelize.STRING },
+    precoProduto: { type: Sequelize.DECIMAL(10, 2) }
 });
 
-// Sincroniza os modelos com o banco de dados
-db.sequelize.sync({ force: true })  // `force: true` recria as tabelas a cada execução
-    .then(() => {
-        console.log("Tabelas criadas com sucesso!");
-    })
-    .catch((erro) => {
-        console.log("Erro ao criar tabelas: ", erro);
-    });
+// Modelo de Usuario
+const Usuario = sequelize.define('usuarios', {
+    username: { type: Sequelize.STRING, unique: true, allowNull: false },
+    senha: { type: Sequelize.STRING, allowNull: false }
+});
 
-// Exporta todos os modelos
+// Sincronizar com o banco de dados
+sequelize.sync({ alter: true })
+    .then(() => console.log("Tabelas sincronizadas com sucesso!"))
+    .catch((erro) => console.log("Erro ao sincronizar tabelas: ", erro));
+
 module.exports = {
     Modalidade,
     Inscricao,
     Contato,
     Loja,
     Evento,
+    Usuario
 };

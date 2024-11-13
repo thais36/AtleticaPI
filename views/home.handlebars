@@ -5,93 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atlética Fatec Zona Leste</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px; /* Espaço acima da tabela */
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFE0;
         }
-        th, td {
-            text-align: center; /* Centraliza o texto */
-            padding: 10px; /* Adiciona um pouco de espaçamento */
-        }
-        th {
+
+        /* Estilo do cabeçalho */
+        .header {
             background-color: #94210a;
+            padding: 20px;
+            text-align: center;
             color: white;
         }
-        .button {
-            padding: 5px 10px;
-            margin: 0 5px;
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+
+        /* Botão de inscrição */
+        .inscricao-button {
+            background-color: #01480a;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Estilos para o container de cards */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Estilos para cada card */
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            padding: 15px;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Estilos para título do card */
+        .card-title {
+            font-size: 1.2em;
+            color: #94210a;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para o botão de ações */
+        .card-action {
+            margin-top: 15px;
+            padding: 8px 12px;
+            background-color: #01480a;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
         }
-        .edit-button {
-            background-color: blue;
-            color: white;
+
+        /* Estilo do rodapé */
+        .footer {
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #333;
+            text-align: center;
         }
-        .delete-button {
-            background-color: red;
-            color: white;
+        .footer a {
+            color: #94210a;
+            text-decoration: none;
         }
     </style>
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+<body>
+
     <!-- Header -->
-   <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
-    <img src="/images/icon/logo.png" alt="Atlética Fatec Zona Leste" class="logo" style="max-width: 150px; height: auto;">
-    <h1>Atlética Fatec Zona Leste</h1>
-    <p>Fique por dentro do que acontece na Atlética Fatec Zona Leste!</p>
-</header>
+    <header class="header">
+        <img src="/images/icon/logo.png" alt="Atlética Fatec Zona Leste">
+        <h1>Atlética Fatec Zona Leste</h1>
+        <p>Fique por dentro do que acontece na Atlética Fatec Zona Leste!</p>
+    </header>
 
-
-    <!-- Inscrição -->
+    <!-- Botão de Inscrição -->
     <div style="text-align: center; margin: 20px;">
-        <a href="/inscricao" class="inscricao-button" style="background-color: #01480a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-            Inscreva-se na Atlética
-        </a>
+        <a href="/inscricao" class="inscricao-button">Inscreva-se na Atlética</a>
     </div>
 
-    <!-- Modalidades Esportivas -->
- 
 
-    <!-- Tabela de Modalidades -->
-    <div class="container" style="padding: 20px;">
-        <p>Lista das modalidades disponíveis na Atlética</p>
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Dias</th>
-                    <th>Horário</th>
-                    <th>Local</th>
-                    <th>Ações</th> <!-- Coluna para ações -->
-                </tr>
-            </thead>
-            <tbody>
-                {{#if modalidades.length}}
-                    {{#each modalidades}}
-                    <tr>
-                        <td>{{this.modalidade}}</td>
-                        <td>{{this.descricao}}</td>
-                        <td>{{this.dias}}</td>
-                        <td>{{this.horario}}</td>
-                        <td>{{this.local}}</td>
-                    </tr>
-                    {{/each}}
-                {{else}}
-                    <tr><td colspan="6" style="text-align: center;">Nenhuma modalidade encontrada.</td></tr>
-                {{/if}}
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Localização -->
-    <section class="localizacao" style="padding: 20px; background-color: #f9f9f9;">
-        <h2 style="text-align: center;">Localização</h2>
-        <p style="text-align: center;">A FATEC Zona Leste está localizada na Avenida Águia de Haia, 2983 - Cidade A. E. Carvalho, São Paulo - SP, CEP: 03694-0001. Você pode encontrar mais informações no site oficial da FATEC Zona Leste: 
-        <a href="https://fateczl.cps.sp.gov.br/" target="_blank" style="color: #94210a;">FATEC Zona Leste</a></p>
+    <!-- Modalidades em formato de Cards -->
+    <section class="modalidades">
+        <h2 style="text-align: center; color: #94210a;">Modalidades Disponíveis</h2>
+        <div class="card-container">
+            {{#if modalidades.length}}
+                {{#each modalidades}}
+                    <div class="card">
+                        <h3 class="card-title">{{this.modalidade}}</h3>
+                        <p><strong>Descrição:</strong> {{this.descricao}}</p>
+                        <p><strong>Dias:</strong> {{this.dias}}</p>
+                        <p><strong>Horário:</strong> {{this.horario}}</p>
+                        <p><strong>Local:</strong> {{this.local}}</p>
+                    </div>
+                {{/each}}
+            {{else}}
+                <p style="text-align: center;">Nenhuma modalidade encontrada.</p>
+            {{/if}}
+        </div>
     </section>
+
+    <!-- Mapa e Localização -->
+    <section class="mapa" style="padding: 20px; background-color: #f9f9f9; text-align: center;">
+        <h2 style="color: #94210a; margin-bottom: 10px;">Mapa da Localização</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.277058255061!2d-46.478550424671134!3d-23.522535478826544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce61270808f47f%3A0xddc2deca4778eb69!2sFATEC%20Zona%20Leste!5e0!3m2!1spt-BR!2sbr!4v1730691709709!5m2!1spt-BR!2sbr" 
+            width="80%" height="300" style="border:0; max-width: 500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <section class="localizacao" style="padding: 15px; background-color: #f9f9f9; text-align: center;">
+        <h3 style="margin-bottom: 10px; color: #94210a;">Localização</h3>
+        <p style="margin: 0; color: #333; font-size: 14px;">
+            A FATEC Zona Leste está localizada na Avenida Águia de Haia, 2983 - Cidade A. E. Carvalho, São Paulo - SP, CEP: 03694-0001.
+            <br>
+            Para mais informações, visite o site oficial:
+            <a href="https://fateczl.cps.sp.gov.br/" target="_blank">FATEC Zona Leste</a>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Atlética Fatec Zona Leste © 2024</p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/atleticafateczl/" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram" style="font-size: 30px; margin-left: 10px;"></i> Instagram da Atlética
+            </a>
+        </div>
+    </footer>
+
 </body>
 </html>
+
