@@ -291,29 +291,15 @@ app.post("/deletarInscricao/:id", (req, res) => {
 
 // -> Contato - Mensagens de alunos e demais interessados
 // Rota para consultar os contatos
-app.get("/consultarContato", (req, res) => {
-    renderData(Contato, res, "consultarContato", "contatos");
-});
-
-// Rota para editar um contato
-app.get("/editarContato/:id", (req, res) => {
-    Contato.findByPk(req.params.id)
-        .then((contato) => {
-            if (contato) {
-                res.render("editarContato", { contato });
-            }
-            else {
-                res.send("Contato não encontrado.");
-            }
+app.get('/consultarContato', (req, res) => {
+    Contato.findAll()  
+        .then(contatos => {
+            res.render('consultarContato', { contatos: contatos });
         })
-        .catch((erro) => res.send("Erro ao buscar contato: " + erro));
-});
-
-// Rota para atualizar um contato
-app.post("/atualizarContato/:id", (req, res) => {
-    Contato.update(req.body, { where: { id: req.params.id } })
-        .then(() => res.redirect("/consultarContato"))
-        .catch((erro) => res.send("Erro ao atualizar contato: " + erro));
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Erro ao carregar contatos');
+        });
 });
 
 // Rota para deletar um contato
