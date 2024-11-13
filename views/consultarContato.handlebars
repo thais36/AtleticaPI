@@ -1,4 +1,5 @@
-{{!-- consultarEvento.handlebars --}}
+{{!-- consultarContato.handlebars --}}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -103,12 +104,12 @@
             <tbody>
                 {{#each contatos}}
                 <tr>
-                    <td>{{this.nome}}</td>
+                    <td>{{this.contato}}</td>
                     <td>{{this.email}}</td>
                     <td>{{this.telefone}}</td>
                     <td>{{this.mensagem}}</td>
                     <td>
-                        <form action="/excluirContato/{{this.id}}" method="POST" style="display:inline;">
+                        <form action="/deletarContato/{{this.id}}" method="POST" style="display:inline;">
                             <button type="submit" class="button delete-button" onclick="return confirm('Deseja excluir este recado?')">Excluir</button>
                         </form>
                     </td>

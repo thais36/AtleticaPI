@@ -1,4 +1,4 @@
-const { sequelize, Sequelize } = require("./banco"); // Corrigido para importar sequelize
+const { sequelize, Sequelize } = require("./banco");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -20,6 +20,13 @@ const Evento = sequelize.define('eventos', {
     local: { type: Sequelize.STRING },
 });
 
+// Modelo de Loja
+const Loja = sequelize.define('lojas', {
+    loja: { type: Sequelize.STRING },
+    descricao: { type: Sequelize.STRING },
+    preco: { type: Sequelize.DECIMAL(10, 2) }
+});
+
 // Modelo de Inscrição
 const Inscricao = sequelize.define('inscricoes', {
     nomeInscricao: { type: Sequelize.STRING },
@@ -38,18 +45,10 @@ const Inscricao = sequelize.define('inscricoes', {
 
 // Modelo de Contato
 const Contato = sequelize.define('contatos', {
-    nome: { type: Sequelize.STRING },
+    contato: { type: Sequelize.STRING },
     email: { type: Sequelize.STRING },
     telefone: { type: Sequelize.STRING },
     mensagem: { type: Sequelize.TEXT }
-});
-
-// Modelo de Loja
-const Loja = sequelize.define('lojas', {
-    imagemUrl: { type: Sequelize.STRING, allowNull: true },
-    nomeProduto: { type: Sequelize.STRING },
-    descricaoProduto: { type: Sequelize.STRING },
-    precoProduto: { type: Sequelize.DECIMAL(10, 2) }
 });
 
 // Modelo de Usuario
@@ -59,7 +58,7 @@ const Usuario = sequelize.define('usuarios', {
 });
 
 // Sincronizar com o banco de dados
-sequelize.sync({ alter: true })
+sequelize.sync({ alter: false })
     .then(() => console.log("Tabelas sincronizadas com sucesso!"))
     .catch((erro) => console.log("Erro ao sincronizar tabelas: ", erro));
 

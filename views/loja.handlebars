@@ -1,31 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja Virtual - Atlética Fatec Zona Leste</title>
-</head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #FFFFE0;">
+    <title>Loja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFE0;
+        }
 
-    <!-- Header -->
-    <header class="header" style="background-color: #94210a; padding: 20px; text-align: center; color: white;">
-        <h1>Loja Virtual</h1>
-        <p>Confira nossos produtos exclusivos!</p>
+        header {
+            background-color: #94210a;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .lojas {
+            padding: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .loja-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: calc(50% - 20px);
+            padding: 20px;
+            text-align: center;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .loja-card h3 {
+            font-size: 1.5em;
+            color: #94210a;
+            margin-bottom: 10px;
+        }
+
+        .loja-card p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        footer {
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Produtos da Loja Virtual</h1>
     </header>
 
-    <!-- Produtos -->
-    <section class="produtos" style="padding: 20px;">
-        <div class="produtos-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            {{#each produtos}}
-                <div class="produto-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; width: 200px; text-align: center;">
-                    <img src="{{this.imagem}}" alt="{{this.nome}}" style="width: 100%; height: auto;">
-                    <h3 style="background-color: #94210a; color: white; margin: 0; padding: 10px 0;">{{this.nome}}</h3>
-                    <p style="padding: 10px;">{{this.descricao}}</p>
-                    <p style="padding: 10px; color: #94210a;"><strong>R$ {{this.preco}}</strong></p>
-                </div>
-            {{/each}}
+    <section class="lojas">
+        <h2 style="text-align: center; color: #94210a;">Produtos Disponíveis</h2>
+      <div class="card-container">
+    {{#each lojas}}
+        <div class="loja-card">
+            <h3>{{this.loja}}</h3>
+            <p><strong>Descrição:</strong> {{this.descricao}}</p>
+            <p><strong>Preço:</strong> {{this.preco}}</p>
         </div>
+    {{/each}}
+</div>
+
     </section>
 
+    <footer class="footer">
+        <p>Atlética Fatec Zona Leste © 2024</p>
+    </footer>
+
+    <script src="/scripts.js"></script>
 </body>
+
 </html>

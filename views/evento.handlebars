@@ -11,36 +11,52 @@
             padding: 0;
             background-color: #FFFFE0;
         }
+
         header {
             background-color: #94210a;
             padding: 20px;
             text-align: center;
             color: white;
         }
+
         .eventos {
             padding: 20px;
         }
-        .eventos-grid {
+
+        .card-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            flex-wrap: wrap; /* Permite quebrar linha quando necessário */
+            gap: 20px; /* Espaçamento entre os cards */
+            justify-content: center; /* Centraliza os cards na tela */
         }
+
         .evento-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: calc(50% - 20px); /* Cada card ocupa 50% da largura menos o espaçamento */
+            padding: 20px;
             text-align: center;
-            width: 250px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
+            color: #333;
+            box-sizing: border-box; /* Para garantir que o padding não aumente a largura */
         }
+
         .evento-card h3 {
-            font-size: 18px;
+            font-size: 1.5em;
             color: #94210a;
+            margin-bottom: 10px;
         }
+
         .evento-card p {
-            margin: 8px 0;
+            margin: 10px 0;
+            text-align: justify; /* Justifica o texto */
+        }
+
+        footer {
+            padding: 20px;
+            background-color: #f1f1f1;
+            color: #333;
+            text-align: center;
         }
     </style>
 </head>
@@ -49,23 +65,24 @@
         <h1>Eventos e Campeonatos</h1>
     </header>
 
+    <!-- Modalidades em formato de Cards -->
     <section class="eventos">
-        <h2 style="text-align: center;">Eventos Disponíveis</h2>
-        <div class="eventos-grid">
+        <h2 style="text-align: center; color: #94210a;">Eventos Disponíveis</h2>
+        <div class="card-container">
             {{#each eventos}}
                 <div class="evento-card">
-                    <h3>{{this.nome}}</h3>
-                    <p><strong>Data:</strong> {{this.data}}</p>
+                    <h3>{{this.evento}}</h3>
+                    <p><strong>Descrição:</strong> {{this.descricao}}</p>
+                    <p><strong>Dias:</strong> {{this.dias}}</p>
                     <p><strong>Horário:</strong> {{this.horario}}</p>
                     <p><strong>Local:</strong> {{this.local}}</p>
-                    <p><strong>Descrição:</strong> {{this.descricao}}</p>
                 </div>
             {{/each}}
         </div>
     </section>
 
-    <footer class="footer" style="padding: 20px; background-color: #f1f1f1; color: #333; text-align: center;">
-        <p style="margin: 0;">Atlética Fatec Zona Leste © 2024</p>
+    <footer class="footer">
+        <p>Atlética Fatec Zona Leste © 2024</p>
     </footer>
 
     <script src="/scripts.js"></script>

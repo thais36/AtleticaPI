@@ -194,9 +194,14 @@ app.get("/evento", (req, res) => {
 
 // Rotas de exibição para Loja - alunos e demais interessados
 app.get("/loja", (req, res) => {
-    renderData(Loja, res, "loja");
+    Loja.findAll()
+        .then(lojas => {
+            res.render("loja", { lojas });  // Renderizando para o template loja.handlebars
+        })
+        .catch((erro) => {
+            res.send("Erro ao buscar produtos: " + erro);
+        });
 });
-
 
 // ---> Gestão <--- (Página de gestão do site com links para os CRUDs)
 
@@ -256,15 +261,72 @@ app.get("/consultarInscricao", (req, res) => {
     renderData(Inscricao, res, "consultarInscricao", "inscricoes");
 });
 
+// Rotas para editar uma inscrição
+app.get("/editarInscricao/:id", (req, res) => {
+    Inscricao.findByPk(req.params.id)
+        .then((inscricao) => {
+            if (inscricao) {
+                res.render("editarInscricao", { inscricao });
+            } else {
+                res.send("Inscrição não encontrada.");
+            }
+        })
+        .catch((erro) => res.send("Erro ao buscar inscrição: " + erro));
+});
+
+// Rota para atualizar uma inscrição
+app.post("/atualizarInscricao/:id", (req, res) => {
+    Inscricao.update(req.body, { where: { id: req.params.id } })
+        .then(() => res.redirect("/consultarInscricao"))
+        .catch((erro) => res.send("Erro ao atualizar inscrição: " + erro));
+});
+
+// Rota para deletar uma inscrição
+app.post("/deletarInscricao/:id", (req, res) => {
+    Inscricao.destroy({ where: { id: req.params.id } })
+        .then(() => res.redirect("/consultarInscricao"))
+        .catch((erro) => res.send("Erro ao deletar inscrição: " + erro));
+});
+
+
 // -> Contato - Mensagens de alunos e demais interessados
+// Rota para consultar os contatos
 app.get("/consultarContato", (req, res) => {
     renderData(Contato, res, "consultarContato", "contatos");
+});
+
+// Rota para editar um contato
+app.get("/editarContato/:id", (req, res) => {
+    Contato.findByPk(req.params.id)
+        .then((contato) => {
+            if (contato) {
+                res.render("editarContato", { contato });
+            }
+            else {
+                res.send("Contato não encontrado.");
+            }
+        })
+        .catch((erro) => res.send("Erro ao buscar contato: " + erro));
+});
+
+// Rota para atualizar um contato
+app.post("/atualizarContato/:id", (req, res) => {
+    Contato.update(req.body, { where: { id: req.params.id } })
+        .then(() => res.redirect("/consultarContato"))
+        .catch((erro) => res.send("Erro ao atualizar contato: " + erro));
+});
+
+// Rota para deletar um contato
+app.post("/deletarContato/:id", (req, res) => {
+    Contato.destroy({ where: { id: req.params.id } })
+        .then(() => res.redirect("/consultarContato"))
+        .catch((erro) => res.send("Erro ao deletar contato: " + erro));
 });
 
 // -> Loja 
 // Rota para consultar os produtos da loja
 app.get("/consultarLoja", (req, res) => {
-    renderData(Loja, res, "consultarLoja", "produtos");
+    renderData(Loja, res, "consultarLoja", "lojas");
 });
 
 // Rota para cadastrar um novo produto na loja
@@ -272,12 +334,41 @@ app.get("/cadastrarLoja", (req, res) => {
     res.render("cadastrarLoja");
 });
 
-// Rota para cadastrar um novo produto na loja
 app.post("/cadastrarLoja", (req, res) => {
     Loja.create(req.body)
-        .then(() => res.redirect("/consultarLoja"))
-        .catch((erro) => res.send("Erro ao cadastrar produto na loja: " + erro));
+    .then(() => {
+        console.log("Produto cadastrado com sucesso:", req.body);
+        res.redirect("/consultarLoja");
+    })
+    .catch((erro) => res.send("Erro ao cadastrar produto: " + erro));
 });
+
+// Rota para editar um produto
+app.get("/editarLoja/:id", (req, res) => {
+    Loja.findByPk(req.params.id)
+        .then((loja) => {
+            if (loja) {
+                res.render("editarLoja", { loja });
+            } else {
+                res.send("Produto não encontrado.");
+            }
+        })
+        .catch((erro) => res.send("Erro ao buscar produto: " + erro));
+});
+
+// Rota para atualizar um produto
+app.post("/atualizarLoja/:id", (req, res) => {
+    Loja.update(req.body, { where: { id: req.params.id } })
+        .then(() => res.redirect("/consultarLoja"))
+        .catch((erro) => res.send("Erro ao atualizar produto: " + erro));
+});
+
+// Rota para deletar um produto
+app.post("/deletarLoja/:id", (req, res) => {
+    Loja.destroy({ where: { id: req.params.id } })
+        .then(() => res.redirect("/consultarLoja"))
+        .catch((erro) => res.send("Erro ao deletar produto: " + erro));
+}); 
 
 // -> Eventos e Campeonatos
 // Rota para consultar os eventos
@@ -285,7 +376,7 @@ app.get("/consultarEvento", (req, res) => {
     renderData(Evento, res, "consultarEvento", "eventos");
 });
 
-// Rota para cadastrar um novo eveno
+// Rota para cadastrar um novo evento
 app.get("/cadastrarEvento", (req, res) => {
     res.render("cadastrarEvento");
 });
