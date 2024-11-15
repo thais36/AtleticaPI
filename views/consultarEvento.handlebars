@@ -2,114 +2,183 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Eventos</title>
     <style>
         body {
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #FFFFE0;
         }
+
         header {
-            background-color: #94210a; 
-            padding: 20px; 
-            text-align: center; 
+            background-color: #94210a;
+            padding: 20px;
+            text-align: center;
             color: white;
         }
+
         nav {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 10px 20px; 
-            background-color: #f1f1f1; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f1f1f1;
             color: #333;
         }
+
         .navbar-menu {
-            list-style: none; 
-            display: flex; 
-            gap: 20px; 
-            margin: 0; 
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
             padding: 0;
         }
+
         .container {
-            padding: 20px; 
-            max-width: 800px; 
+            padding: 20px;
+            max-width: 1200px;
             margin: 20px auto;
             background-color: white;
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
         }
-         .add-button {
-            padding: 10px 20px; 
-            background-color: green; 
-            color: white; 
-            text-decoration: none; 
+
+        .add-button {
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            text-decoration: none;
             border-radius: 5px;
         }
+
         table {
-            width: 100%; 
-            border-collapse: collapse; 
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
-        th, td {
-            padding: 10px; 
-            border: 1px solid #ddd; 
-            text-align: left;
+
+        th,
+        td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
         }
-         th, td {
-            text-align: center; 
-            padding: 10px; 
-            border: 1px solid #ddd; 
-        }
+
         th {
-            background-color: #94210a; 
+            background-color: #94210a;
             color: white;
         }
-         .button {
-            padding: 5px 10px; 
-            margin: 0 5px; 
-            border: none; 
-            border-radius: 5px; 
+
+        .button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        
+
+        /* Estilo dos botões */
+        td .button {
+            display: inline-block;
+            /* Organiza os botões lado a lado */
+            margin: 0 5px;
+            /* Espaçamento entre os botões */
+        }
+
+
         .edit-button {
-            background-color: blue; 
+            background-color: blue;
             color: white;
         }
+
         .delete-button {
-            background-color: red; 
+            background-color: red;
             color: white;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            /* Espaço abaixo do campo de busca */
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 80%;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #94210a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .add-event-btn {
+            margin-top: 20px;
+            /* Espaço acima do botão de adicionar evento */
         }
     </style>
-
 </head>
+
 <body>
     <header class="header">
         <h1>Gestão do Sistema - Evento</h1>
     </header>
 
-<nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 100px; background-color: #f1f1f1; color: #333;">
-    <ul class="navbar-menu" style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; width: 100%; justify-content: space-between;">
-        <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;" class="navbar-link">Membros Inscritos</a></li>
-        <li><a href="/consultarContato" style="color: #333; text-decoration: none;" class="navbar-link">Recados</a></li>
-        <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;" class="navbar-link">Modalidades Esportivas</a></li>
-        <li><a href="/consultarEvento" style="color: #333; text-decoration: none;" class="navbar-link">Eventos e Campeonatos</a></li>
-        <li><a href="/consultarLoja" style="color: #333; text-decoration: none;" class="navbar-link">Produtos da Loja</a></li>
-    </ul>
-</nav>
+    <nav class="navbar"
+        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 100px; background-color: #f1f1f1; color: #333;">
+        <ul class="navbar-menu"
+            style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; width: 100%; justify-content: space-between;">
+            <li><a href="/consultarInscricao" style="color: #333; text-decoration: none;" class="navbar-link">Membros
+                    Inscritos</a></li>
+            <li><a href="/consultarContato" style="color: #333; text-decoration: none;" class="navbar-link">Recados</a>
+            </li>
+            <li><a href="/consultarModalidade" style="color: #333; text-decoration: none;"
+                    class="navbar-link">Modalidades Esportivas</a></li>
+            <li><a href="/consultarEvento" style="color: #333; text-decoration: none;" class="navbar-link">Eventos e
+                    Campeonatos</a></li>
+            <li><a href="/consultarLoja" style="color: #333; text-decoration: none;" class="navbar-link">Produtos da
+                    Loja</a></li>
+        </ul>
+    </nav>
 
-   <div class="container" style="padding: 20px;">
+    <div class="container" style="padding: 20px;">
         <h4>Consulta de Eventos e Campeonatos</h4>
-        <div style="text-align: right;">
-    <a href="/cadastrarEvento" style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Adicionar Evento ou Campeonato</a>
-</div>
-        <p>Lista das eventos e campeonatos disponíveis na Atlética</p>
-        
+
+        <!-- Campo de Busca p/ Imprementar mais para frente
+
+        <div class="search-bar">
+            <form action="/consultarEvento" method="GET">
+                <input type="text" name="query" placeholder="Buscar por nome do evento..." value="{{query}}">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+        <br> 
+        -->
+
+        <!-- Botão de Adicionar Evento com espaço acima -->
+        <div class="add-event-btn" style="text-align: right;">
+            <a href="/cadastrarEvento"
+                style="padding: 10px 20px; background-color: green; color: white; text-decoration: none; border-radius: 5px;">Adicionar
+                Evento ou Campeonato</a>
+        </div>
+
+        <br> <!-- Espaço entre o botão de adicionar evento e o container -->
+
+
+
+        <p>Lista dos eventos e campeonatos disponíveis na Atlética</p>
+
         <table>
             <thead>
                 <tr>
@@ -121,29 +190,32 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-      <tbody>
-    {{#each eventos}}
-    <tr>
-        <td>{{this.evento}}</td>
-        <td>{{this.descricao}}</td>
-        <td>{{this.dias}}</td>
-        <td>{{this.horario}}</td>
-        <td>{{this.local}}</td>
-        <td>
-            <a href="/editarEvento/{{this.id}}" class="button edit-button">Editar</a>
-            <form action="/deletarEvento/{{this.id}}" method="POST" style="display:inline;">
-                <button type="submit" class="button delete-button" onclick="return confirm('Deseja excluir este evento ou campeonato?')">Excluir</button>
-            </form>
-        </td>
-    </tr>
-    {{else}}
-    <tr>
-        <td colspan="6">Nenhum evento ou campeonato encontrado.</td>
-    </tr>
-    {{/each}}
-</tbody>
+            <tbody>
+                {{#each eventos}}
+                <tr>
+                    <td>{{this.evento}}</td>
+                    <td>{{this.descricao}}</td>
+                    <td>{{this.dias}}</td>
+                    <td>{{this.horario}}</td>
+                    <td>{{this.local}}</td>
+                    <td>
+                        <a href="/editarEvento/{{this.id}}" class="button edit-button">Editar</a>
+                        <form action="/deletarEvento/{{this.id}}" method="POST" style="display:inline;">
+                            <button type="submit" class="button delete-button"
+                                onclick="return confirm('Deseja excluir este evento ou campeonato?')">Excluir</button>
+                        </form>
+                    </td>
+
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="6">Nenhum evento ou campeonato encontrado.</td>
+                </tr>
+                {{/each}}
+            </tbody>
         </table>
     </div>
 
 </body>
+
 </html>
