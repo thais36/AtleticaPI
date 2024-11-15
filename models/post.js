@@ -29,7 +29,7 @@ const Loja = sequelize.define('lojas', {
 
 // Modelo de Inscrição
 const Inscricao = sequelize.define('inscricoes', {
-    nomeInscricao: { type: Sequelize.STRING },
+    inscricao: { type: Sequelize.STRING },
     cpf: { type: Sequelize.STRING },
     endereco: { type: Sequelize.STRING },
     bairro: { type: Sequelize.STRING },

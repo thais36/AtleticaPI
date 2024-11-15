@@ -148,6 +148,7 @@ app.post("/registrar", async (req, res) => {
 });
 
 
+
 // ---> HOME <---
 
 // Rota principal (home) - Exibe modalidades e link para inscrição
@@ -163,6 +164,7 @@ app.get("/", (req, res) => {
 
 // Rota para inscrição - alunos que desejam se tornar membros da atlética
 app.get("/inscricao", (req, res) => res.render("inscricao"));
+
 
 // Rota para cadastrar uma nova inscrição
 app.post("/cadastrarInscricao", (req, res) => {
@@ -202,6 +204,8 @@ app.get("/loja", (req, res) => {
             res.send("Erro ao buscar produtos: " + erro);
         });
 });
+
+
 
 // ---> Gestão <--- (Página de gestão do site com links para os CRUDs)
 
@@ -254,11 +258,17 @@ app.post("/deletarModalidade/:id", (req, res) => {
 });
 
 
-
 // -> Inscrição - Listagem de inscrições de alunos que desejam se tornar membros da atlética
 // Rota para consultar as inscrições
 app.get("/consultarInscricao", (req, res) => {
-    renderData(Inscricao, res, "consultarInscricao", "inscricoes");
+    Inscricao.findAll()
+        .then(inscricoes => {
+            res.render("consultarInscricao", { inscricoes: inscricoes });
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send('Erro ao carregar inscrições');
+        });
 });
 
 // Rotas para editar uma inscrição
@@ -309,6 +319,7 @@ app.post("/deletarContato/:id", (req, res) => {
         .catch((erro) => res.send("Erro ao deletar contato: " + erro));
 });
 
+
 // -> Loja 
 // Rota para consultar os produtos da loja
 app.get("/consultarLoja", (req, res) => {
@@ -356,6 +367,7 @@ app.post("/deletarLoja/:id", (req, res) => {
         .catch((erro) => res.send("Erro ao deletar produto: " + erro));
 }); 
 
+
 // -> Eventos e Campeonatos
 // Rota para consultar os eventos
 app.get("/consultarEvento", (req, res) => {
@@ -402,6 +414,7 @@ app.post("/deletarEvento/:id", (req, res) => {
         .then(() => res.redirect("/consultarEvento"))
         .catch((erro) => res.send("Erro ao deletar evento: " + erro));
 });
+
 
 // Inicialização do servidor
 app.listen(8081, () => console.log("Servidor ativo na porta 8081!"));
