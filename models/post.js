@@ -1,10 +1,9 @@
 const { sequelize, Sequelize } = require("./banco");
 const bcrypt = require("bcrypt");
-require("dotenv").config();
 
 // Modelo de Modalidade
 const Modalidade = sequelize.define('modalidades', {
-    modalidade: { type: Sequelize.STRING },
+    modalidade: { type: Sequelize.STRING, allowNull: false },
     descricao: { type: Sequelize.STRING },
     dias: { type: Sequelize.STRING },
     horario: { type: Sequelize.STRING },
@@ -13,7 +12,7 @@ const Modalidade = sequelize.define('modalidades', {
 
 // Modelo de Evento
 const Evento = sequelize.define('eventos', {
-    evento: { type: Sequelize.STRING },
+    evento: { type: Sequelize.STRING, allowNull: false },
     descricao: { type: Sequelize.STRING },
     dias: { type: Sequelize.STRING },
     horario: { type: Sequelize.STRING },
@@ -22,15 +21,15 @@ const Evento = sequelize.define('eventos', {
 
 // Modelo de Loja
 const Loja = sequelize.define('lojas', {
-    loja: { type: Sequelize.STRING },
+    loja: { type: Sequelize.STRING, allowNull: false },
     descricao: { type: Sequelize.STRING },
     preco: { type: Sequelize.DECIMAL(10, 2) }
 });
 
 // Modelo de Inscrição
 const Inscricao = sequelize.define('inscricoes', {
-    inscricao: { type: Sequelize.STRING },
-    cpf: { type: Sequelize.STRING },
+    inscricao: { type: Sequelize.STRING, allowNull: false },
+    cpf: { type: Sequelize.STRING, allowNull: false },
     endereco: { type: Sequelize.STRING },
     bairro: { type: Sequelize.STRING },
     cep: { type: Sequelize.STRING },
@@ -62,11 +61,30 @@ sequelize.sync({ alter: false })
     .then(() => console.log("Tabelas sincronizadas com sucesso!"))
     .catch((erro) => console.log("Erro ao sincronizar tabelas: ", erro));
 
+    
+// Função genérica para buscar dados
+const getAll = async (model) => {
+    try {
+        return await model.findAll();
+    } catch (error) {
+        console.error(`Erro ao buscar ${model.name}s:`, error);
+        throw error;
+    }
+};
+
+// Funções específicas de busca
+const getModalidades = () => getAll(Modalidade);
+const getEventos = () => getAll(Evento);
+const getLojas = () => getAll(Loja);
+
 module.exports = {
     Modalidade,
+    Evento,
+    Loja,
     Inscricao,
     Contato,
-    Loja,
-    Evento,
-    Usuario
+    Usuario,
+    getModalidades,
+    getEventos,
+    getLojas
 };

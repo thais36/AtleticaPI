@@ -10,6 +10,9 @@
   "description": "",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
+    "@nlpjs/basic": "^4.27.0",
+    "@nlpjs/nlp": "^4.27.0",
+    "@nlpjs/request-rn": "^4.25.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "connect-flash": "^0.1.1",
@@ -18,8 +21,11 @@
     "express": "^4.21.1",
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
+    "fs-extra": "^11.2.0",
     "mariadb": "^3.4.0",
     "mysql2": "^3.11.4",
+    "node-nlp": "^4.27.0",
+    "path": "^0.12.7",
     "sequelize": "^6.37.5"
   },
   "devDependencies": {

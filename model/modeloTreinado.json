@@ -1,0 +1,365 @@
+{
+  "settings": {
+    "languages": [
+      "pt"
+    ],
+    "forceNER": true,
+    "autoSave": false,
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "pt"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "pt": {
+        "settings": {
+          "locale": "pt",
+          "trainByDomain": false,
+          "tag": "domain-manager-pt",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "disponiv,esta,modal,qua": {
+            "intent": "info.modalidades",
+            "domain": "default"
+          },
+          "o,que,vend,voc": {
+            "intent": "info.produtos",
+            "domain": "default"
+          },
+          "com,fac,inscrev,me,par": {
+            "intent": "info.inscricao",
+            "domain": "default"
+          },
+          "disponiv,esta,event,qua": {
+            "intent": "info.eventos",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "info.modalidades": "default",
+          "info.produtos": "default",
+          "info.inscricao": "default",
+          "info.eventos": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "Quais modalidades estão disponíveis?",
+            "intent": "info.modalidades"
+          },
+          {
+            "domain": "default",
+            "utterance": "O que vocês vendem?",
+            "intent": "info.produtos"
+          },
+          {
+            "domain": "default",
+            "utterance": "Como faço para me inscrever?",
+            "intent": "info.inscricao"
+          },
+          {
+            "domain": "default",
+            "utterance": "Quais eventos estão disponíveis?",
+            "intent": "info.eventos"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "pt",
+              "tag": "nlu-pt",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "qua": 1,
+              "modal": 1,
+              "esta": 1,
+              "disponiv": 1,
+              "o": 1,
+              "que": 1,
+              "voc": 1,
+              "vend": 1,
+              "com": 1,
+              "fac": 1,
+              "par": 1,
+              "me": 1,
+              "inscrev": 1,
+              "event": 1
+            },
+            "intents": {
+              "info.modalidades": 1,
+              "info.produtos": 1,
+              "info.inscricao": 1,
+              "info.eventos": 1
+            },
+            "intentFeatures": {
+              "info.modalidades": {
+                "qua": 1,
+                "modal": 1,
+                "esta": 1,
+                "disponiv": 1
+              },
+              "info.produtos": {
+                "o": 1,
+                "que": 1,
+                "voc": 1,
+                "vend": 1
+              },
+              "info.inscricao": {
+                "com": 1,
+                "fac": 1,
+                "par": 1,
+                "me": 1,
+                "inscrev": 1
+              },
+              "info.eventos": {
+                "qua": 1,
+                "event": 1,
+                "esta": 1,
+                "disponiv": 1
+              }
+            },
+            "featuresToIntent": {
+              "qua": [
+                "info.modalidades",
+                "info.eventos"
+              ],
+              "modal": [
+                "info.modalidades"
+              ],
+              "esta": [
+                "info.modalidades",
+                "info.eventos"
+              ],
+              "disponiv": [
+                "info.modalidades",
+                "info.eventos"
+              ],
+              "o": [
+                "info.produtos"
+              ],
+              "que": [
+                "info.produtos"
+              ],
+              "voc": [
+                "info.produtos"
+              ],
+              "vend": [
+                "info.produtos"
+              ],
+              "com": [
+                "info.inscricao"
+              ],
+              "fac": [
+                "info.inscricao"
+              ],
+              "par": [
+                "info.inscricao"
+              ],
+              "me": [
+                "info.inscricao"
+              ],
+              "inscrev": [
+                "info.inscricao"
+              ],
+              "event": [
+                "info.eventos"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "pt",
+                "tag": "nlu-pt",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "qua",
+                "modal",
+                "esta",
+                "disponiv",
+                "o",
+                "que",
+                "voc",
+                "vend",
+                "com",
+                "fac",
+                "par",
+                "me",
+                "inscrev",
+                "event"
+              ],
+              "intents": [
+                "info.modalidades",
+                "info.produtos",
+                "info.inscricao",
+                "info.eventos"
+              ],
+              "perceptrons": [
+                [
+                  1.8372290134429932,
+                  7.904016017913818,
+                  1.8372290134429932,
+                  1.8372290134429932,
+                  -0.2156817764043808,
+                  -0.2156817764043808,
+                  -0.2156817764043808,
+                  -0.2156817764043808,
+                  -0.17645390331745148,
+                  -0.17645390331745148,
+                  -0.17645390331745148,
+                  -0.17645390331745148,
+                  -0.17645390331745148,
+                  -6.072344779968262,
+                  0.7009807571105999
+                ],
+                [
+                  -0.40439313650131226,
+                  -0.17204001545906067,
+                  -0.40439313650131226,
+                  -0.40439313650131226,
+                  3.2538986206054688,
+                  3.2538986206054688,
+                  3.2538986206054688,
+                  3.2538986206054688,
+                  -0.28921079635620117,
+                  -0.28921079635620117,
+                  -0.28921079635620117,
+                  -0.28921079635620117,
+                  -0.28921079635620117,
+                  -0.21238985657691956,
+                  1.270108632067887
+                ],
+                [
+                  -0.34794190526008606,
+                  -0.13956280052661896,
+                  -0.34794190526008606,
+                  -0.34794190526008606,
+                  -0.28467443585395813,
+                  -0.28467443585395813,
+                  -0.28467443585395813,
+                  -0.28467443585395813,
+                  2.657459020614624,
+                  2.657459020614624,
+                  2.657459020614624,
+                  2.657459020614624,
+                  2.657459020614624,
+                  -0.1809840351343155,
+                  0.9984307962899647
+                ],
+                [
+                  1.8304709196090698,
+                  -6.061919689178467,
+                  1.8304709196090698,
+                  1.8304709196090698,
+                  -0.18500690162181854,
+                  -0.18500690162181854,
+                  -0.18500690162181854,
+                  -0.18500690162181854,
+                  -0.14927957952022552,
+                  -0.14927957952022552,
+                  -0.14927957952022552,
+                  -0.14927957952022552,
+                  -0.14927957952022552,
+                  7.8982319831848145,
+                  0.7483319834398856
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "pt",
+        "Quais modalidades estão disponíveis?"
+      ],
+      [
+        "pt",
+        "O que vocês vendem?"
+      ],
+      [
+        "pt",
+        "Como faço para me inscrever?"
+      ],
+      [
+        "pt",
+        "Quais eventos estão disponíveis?"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "pt": {
+        "info.modalidades": [
+          {
+            "answer": "As modalidades disponíveis são: Futebol, Basquete, Vôlei e Natação."
+          }
+        ],
+        "info.produtos": [
+          {
+            "answer": "Vendemos camisetas, bonés e chaveiros. Confira nossa loja no site!"
+          }
+        ],
+        "info.inscricao": [
+          {
+            "answer": "Para se inscrever, acesse a página de inscrições e preencha o formulário."
+          }
+        ],
+        "info.eventos": [
+          {
+            "answer": "Os próximos eventos são: Campeonato Regional de Futebol e Festa de Encerramento."
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}

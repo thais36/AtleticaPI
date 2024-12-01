@@ -1,9 +1,80 @@
 const express = require("express");
 const app = express();
 const handlebars = require("express-handlebars").engine;
-const bodyParser = require("body-parser");
-const { Modalidade, Inscricao, Contato, Loja, Evento, Usuario } = require("./models/post");
 const bcrypt = require("bcrypt");
+const fs = require("fs-extra");
+const path = require("path");
+require("dotenv").config();
+const bodyParser = require("body-parser");
+
+const { Modalidade, Inscricao, Contato, Loja, Evento, Usuario } = require("./models/post");
+const { NlpManager } = require("node-nlp");
+
+const modelPath = path.join(__dirname, "model");
+const modelFilePath = path.join(modelPath, "modeloTreinado.json");
+
+// Garantir que o diretório "model" exista
+fs.ensureDirSync(modelPath);
+
+// Configuração do Chatbot
+const manager = new NlpManager({ languages: ["pt"], forceNER: true, autoSave: true }); // Agora o autoSave está ativo
+
+// Carregar modelo treinado ou treinar novamente
+(async () => {
+    if (fs.existsSync(modelFilePath)) {
+        manager.load(modelFilePath);
+    } else {
+        manager.addDocument("pt", "Como faço para me inscrever?", "info.inscricao");
+        manager.addDocument("pt", "Estou com dúvidas como posso falar com a atlética?", "info.contato");
+        manager.addAnswer("pt", "info.inscricao", "Para se inscrever, acesse a página de inscrições e preencha o formulário.");
+        manager.addAnswer("pt", "info.contato", "Para falar com a atlética, acesse a página de contato e envie uma mensagem.");
+        await manager.train();
+        manager.save(modelFilePath); // Salvar o modelo treinado
+        console.log("Chatbot treinado e pronto para uso.");
+    }
+})();
+
+// Rota para processar mensagens do chatbot
+const { getModalidades, getEventos, getLojas } = require("./models/post");
+
+app.use(bodyParser.json());
+
+app.post('/chatbot', async (req, res) => {
+    try {
+        const userMessage = req.body.message; // Captura a mensagem do usuário
+        const response = await manager.process('pt', userMessage); // Processa a mensagem com o NlpManager
+
+        let reply = response.answer;
+
+        // Respostas dinâmicas para modalidades
+        if (response.intent === 'info.modalidades') {
+            const modalidades = await getModalidades();
+            reply = modalidades.length > 0 
+                ? modalidades.map(modalidade => modalidade.modalidade).join(", ") 
+                : "Atualmente não há modalidades disponíveis.";
+        }
+
+        // Respostas dinâmicas para eventos
+        if (response.intent === 'info.eventos') {
+            const eventos = await getEventos();
+            reply = eventos.length > 0 
+                ? eventos.map(evento => evento.evento).join(", ") 
+                : "Não há eventos programados no momento.";
+        }
+
+        // Respostas dinâmicas para produtos da loja
+        if (['info.lojas', 'produto', 'produtos', 'loja', 'loja virtual'].some(term => userMessage.toLowerCase().includes(term))) {
+            const lojas = await getLojas();
+            reply = lojas.length > 0 
+                ? lojas.map(loja => loja.loja).join(", ") 
+                : "No momento, não temos produtos na loja.";
+        }
+
+        res.json({ reply }); // Retorna a resposta para o usuário
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao processar mensagem do chatbot: " + error });
+    }
+});  
 
 
 // Configuração para servir arquivos estáticos
@@ -19,9 +90,10 @@ app.engine("handlebars", handlebars({
 }));
 app.set("view engine", "handlebars");
 
-// Configuração do body-parser
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Configuração do bodyParser para interpretar JSON
+app.use(bodyParser.json());  // Para requisições com JSON
+app.use(bodyParser.urlencoded({ extended: true }));  // Para dados codificados em URL
+
 
 // Middleware para definir variáveis comuns
 app.use((req, res, next) => {
